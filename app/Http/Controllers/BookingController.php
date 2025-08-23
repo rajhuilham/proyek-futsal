@@ -14,13 +14,23 @@ class BookingController extends Controller
     /**
      * Menampilkan semua data booking (halaman admin).
      */
-    public function index()
+    public function index(Request $request) // Tambahkan Request $request
     {
-        $bookings = Jadwal::with(['user', 'lapangan'])
-            ->orderBy('start_datetime', 'desc')
-            ->paginate(10); 
+        // Ambil tanggal dari input filter, jika tidak ada, gunakan tanggal hari ini
+        $selectedDate = $request->input('tanggal', Carbon::today()->toDateString());
 
-        return view('kelola-sewa', ['bookings' => $bookings]);
+        $bookings = Jadwal::with(['user', 'lapangan'])
+            // Filter berdasarkan tanggal yang dipilih
+            ->whereDate('start_datetime', $selectedDate)
+            ->orderBy('start_datetime', 'asc') // Urutkan dari jam terawal
+            ->paginate(10)
+            ->withQueryString(); // Agar pagination tetap membawa filter tanggal
+
+        // Kirim data booking dan tanggal yang dipilih ke view
+        return view('kelola-sewa', [
+            'bookings' => $bookings,
+            'selectedDate' => $selectedDate
+        ]);
     }
 
     /**

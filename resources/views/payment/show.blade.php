@@ -32,21 +32,45 @@
         </div>
     </div>
 </nav>
-<main class="max-w-2xl mx-auto py-10 px-4">
+    <main class="max-w-2xl mx-auto py-10 px-4">
         <div class="bg-white p-8 rounded-lg shadow text-center">
             <h1 class="text-2xl font-bold mb-2">Pembayaran</h1>
-            <p class="text-gray-600 mb-6">Scan QR-Code berikut untuk melanjutkan pemesanan</p>
+            <p class="text-gray-600 mb-6">Silakan lakukan pembayaran sejumlah:</p>
+            <p class="text-3xl font-bold text-indigo-600 mb-8">
+                Rp {{ number_format($booking->price, 0, ',', '.') }}
+            </p>
 
-            <div>
-                <img src="/img/qris.jpg" alt="QR Code Pembayaran" class="mx-auto w-64 h-64 border rounded">
+            <div class="space-y-6 text-left border-t border-b border-gray-200 py-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">1. Scan QRIS</h3>
+                    <div class="flex justify-center">
+                        <img src="{{ asset('/img/qris.jpg') }}" alt="QR Code Pembayaran" class="w-48 h-48 border rounded">
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">2. Transfer Bank / E-Wallet</h3>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">Bank BCA:</span>
+                            <span class="font-mono font-semibold text-gray-900">1234567890</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">OVO:</span>
+                            <span class="font-mono font-semibold text-gray-900">081234567890</span>
+                        </div>
+                        <div class="flex justify-between pt-2">
+                            <span class="text-gray-600">Atas Nama:</span>
+                            <span class="font-semibold text-gray-900">Harfelly Hall</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <p class="mt-4 text-lg font-bold">Total: Rp {{ number_format($booking->price, 0, ',', '.') }}</p>
 
             <div class="mt-8 flex justify-between items-center">
                 <a href="{{ route('booking.create') }}" class="text-gray-600 hover:text-gray-800">&larr; Kembali</a>
                 <a href="{{ route('payment.confirmation', $booking) }}" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-6 text-sm font-medium text-white hover:bg-indigo-700">
-                    Lanjut
+                    Lanjut ke Konfirmasi
                 </a>
             </div>
         </div>
