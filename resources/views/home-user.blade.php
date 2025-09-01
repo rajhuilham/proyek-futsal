@@ -78,7 +78,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="px-6 py-4 text-center text-gray-500">Belum ada booking untuk hari ini.</td>
+                        <td colspan="6" class="px-6 py-4  text-gray-500 text-center">Belum ada booking untuk hari ini.</td>
                     </tr>
                 @endforelse
             </tbody>
